@@ -7,4 +7,17 @@ public class PhoneBook {
 
     private static HashMap<Person,BookEntry> phoneBook;
 
+    public PhoneBook() {
+        
+    }
+
+    public static HashMap<Person, BookEntry> getPhoneBook() {
+        return phoneBook;
+    }
+
+    public static void setPhoneBook(HashMap<Person, BookEntry> phoneBook) {
+        PhoneBook.phoneBook = phoneBook;
+    }
+
+
 }
