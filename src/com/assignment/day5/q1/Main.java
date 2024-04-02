@@ -1,5 +1,7 @@
 package com.assignment.day5.q1;
 
+import java.util.*;
+
 public class Main {
     /*Write a method:
 public static int[] append(String[] a, String[] b)
@@ -17,6 +19,35 @@ Distinct words: 4
 List of the distinct words: [saw, came, conquered, i]
 */
     public static void main(String[] args) {
-        
+        String[] a = {"qqq", "www", "eee"};
+        String[] b = {"aaa", "sss", "ddd"};
+
+        System.out.println("result: "+Arrays.toString(append(a,b)));
+
+
+        String inp="i came i saw i conquered";
+        String[] str=inp.split(" ");
+        Set<String>[] frequency=frequency(str);
+        System.out.println("Duplicate words: "+frequency[1]);
+        System.out.println("Distinct words:"+ frequency[0].size());
+        System.out.println("List of distinct word: "+frequency[0]);
     }
+
+    public static String[] append(String[] a, String[] b) {
+        String[] result=Arrays.copyOf(a,a.length+b.length);
+        System.arraycopy(b,0,result,a.length,b.length);
+        return result;
+    }
+
+    public static Set<String>[] frequency(String[] str){
+        Set<String> distinct=new HashSet<>();
+        Set<String> dup=new HashSet<>();
+        for (String s:str) {
+            if(!distinct.add(s)){
+                dup.add(s);
+            }
+        }
+        return new Set[]{ distinct,dup};
+    }
+
 }

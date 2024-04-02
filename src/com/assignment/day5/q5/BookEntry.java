@@ -15,16 +15,8 @@ public class BookEntry {
         return person;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(PhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     @Override

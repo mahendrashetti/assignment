@@ -1,5 +1,7 @@
 package com.assignment.day5.q5;
 
+import java.util.Objects;
+
 public class PhoneNumber {
     //PhoneNumber Class contains areaCode and number
 
@@ -15,16 +17,21 @@ public class PhoneNumber {
         return areaCode;
     }
 
-    public void setAreaCode(int areaCode) {
-        this.areaCode = areaCode;
-    }
-
     public long getNumber() {
         return number;
     }
 
-    public void setNumber(long number) {
-        this.number = number;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneNumber that = (PhoneNumber) o;
+        return areaCode == that.areaCode && number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(areaCode, number);
     }
 
     @Override

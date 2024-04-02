@@ -20,37 +20,61 @@ public class TestPhoneBook {
 
     public static void main(String[] args) {
 
-        Scanner s=new Scanner(System.in);
+        PhoneBook phoneBook=new PhoneBook();
 
-        HashMap<Person,BookEntry> pBook=new HashMap<>();
-        PhoneBook.setPhoneBook(pBook);
+        Scanner scanner=new Scanner(System.in);
 
         int opt=0;
         do{
             System.out.println("Enter-1: to add a new phonebook entry\nEnter-2: to find the number for a " +
                             "name\nEnter-3: to find name for a number\nEnter-9: to quit");
-            opt=s.nextInt();
+            opt=scanner.nextInt();
+            scanner.nextLine();
             switch (opt){
-                case 1:{
-                    System.out.println("Enter first name of person");
-                    String fName=s.next();
-                    System.out.println("Enter sur name of person");
-                    String sName=s.next();
-                    System.out.println("Enter area code");
-                    int aCode=s.nextInt();
-                    System.out.println("Enter phone no");
-                    long pno=s.nextLong();
-
-                    Person person=new Person(fName,sName);
-                    PhoneNumber phoneNumber=new PhoneNumber(aCode,pno);
-                    BookEntry bookEntry=new BookEntry(person,phoneNumber);
-
-                    PhoneBook.getPhoneBook().put(person,bookEntry);
-                    System.out.println(PhoneBook.getPhoneBook().values());
+                case 1:
+                    System.out.print("Enter first name: ");
+                    String firstName = scanner.nextLine();
+                    System.out.print("Enter surname: ");
+                    String surName = scanner.nextLine();
+                    System.out.print("Enter area code: ");
+                    int areaCode = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter phone number: ");
+                    Long phoneNumber = scanner.nextLong();
+                    phoneBook.addEntry(new Person(firstName, surName), new PhoneNumber(areaCode, phoneNumber));
                     break;
-                }
-
                 case 2:
+                    System.out.print("Enter first name: ");
+                    String fName = scanner.nextLine();
+                    System.out.print("Enter surname: ");
+                    String sName = scanner.nextLine();
+                    Person person = new Person(fName, sName);
+                    PhoneNumber foundPhoneNumber = phoneBook.findPhoneNumber(person);
+                    if (foundPhoneNumber != null) {
+                        System.out.println("Phone number: " + foundPhoneNumber);
+                    } else {
+                        System.out.println("Person not found in the phonebook.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter area code: ");
+                    int aCode = scanner.nextInt();
+                    System.out.print("Enter phone number: ");
+                    long pNumber = scanner.nextLong();
+                    PhoneNumber phNumber = new PhoneNumber(aCode, pNumber);
+                    Person foundPerson = phoneBook.findPerson(phNumber);
+                    if (foundPerson != null) {
+                        System.out.println("Name: " + foundPerson);
+                    } else {
+                        System.out.println("Phone number not found in the phonebook.");
+                    }
+                    break;
+                case 9:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }while (opt!=9);
     }
